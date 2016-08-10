@@ -15,7 +15,6 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -30,33 +29,56 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+
 INSTALLED_APPS = (
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Auth',
+    'django.contrib.admin',
+    # Uncomment the next line to enable admin documentation:
+    # 'django.contrib.admindocs',
+    'django_extensions',
+    'bootstrap_pagination',
+    'crispy_forms',
+    'markdown_deux',
+    'stronghold',
+    'mathfilters',
+    'django_generic_permissions',
+
+    'ProninosProject',
+    'ProninosProject.utils',
+    'ProninosProject.friends',
+    'ProninosProject.zip_codes',
+    'ProninosProject.contributions',
+    'ProninosProject.projects',
+    'ProninosProject.events',
+    'ProninosProject.campaigns',
+    'ProninosProject.reports',
+    'ProninosProject.Auth',
+    'ProninosProject.billing'
+
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
+    'stronghold.middleware.LoginRequiredMiddleware',
 )
+STRONGHOLD_DEFAULTS = True
+LOGIN_URL = '/Auth/login/'
 
 ROOT_URLCONF = 'ProninosProject.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'ProninosProject/templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -76,22 +98,29 @@ WSGI_APPLICATION = 'ProninosProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+# Database
+# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'proninos',
         'USER': 'postgres',
-        'PASSWORD': 'ikim1980'
-    },
+        'PASSWORD':'ikim1980'
+    }
 }
 
+# Local time zone for this installation. Choices can be found here:
+# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# although not all choices may be available on all operating systems.
+# In a Windows environment this must be set to your system time zone.
+TIME_ZONE = 'America/Mexico_City'
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.8/topics/i18n/
+# Language code for this installation. All choices can be found here:
+# http://www.i18nguy.com/unicode/language-identifiers.html
+LANGUAGE_CODE = 'es'
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
+SITE_ID = 1
 
 USE_I18N = True
 
@@ -104,3 +133,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'

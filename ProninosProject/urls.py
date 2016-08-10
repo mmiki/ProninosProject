@@ -15,7 +15,20 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from ProninosProject.views import Home
+
 
 urlpatterns = [
+    url(r'^$', Home.as_view(), name='home'),
+    url(r'^friends/', include('ProninosProject.friends.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^Auth/', include('ProninosProject.Auth.urls')),
+    url(r'^contributions/', include('ProninosProject.contributions.urls')),
+    url(r'^projects/', include('ProninosProject.projects.urls')),
+    url(r'^events/', include('ProninosProject.events.urls')),
+    url(r'^campaigns/', include('ProninosProject.campaigns.urls')),
+    url(r'^billing/', include('ProninosProject.billing.urls')),
+    url(r'^reports/', include('ProninosProject.reports.urls')),
+    url(r'^zip/', include('ProninosProject.zip_codes.urls')),
 ]
+
